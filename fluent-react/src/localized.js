@@ -83,8 +83,9 @@ export default class Localized extends Component {
 
     // Validate that the child element isn't an array
     if (Array.isArray(elem)) {
-      throw new Error("<Localized/> expected to receive a single " +
-        "React node child");
+      throw new Error(
+        "<Localized/> expected to receive a single React node child"
+      );
     }
 
     if (!l10n) {
@@ -126,7 +127,7 @@ export default class Localized extends Component {
     // message value and do not pass it to cloneElement in order to avoid the
     // "void element tags must neither have `children` nor use
     // `dangerouslySetInnerHTML`" error.
-    if (elem.type in VOID_ELEMENTS) {
+    if (elem.type in VOID_ELEMENTS && VOID_ELEMENTS[elem.type] !== undefined) {
       return cloneElement(elem, localizedProps);
     }
 
@@ -179,7 +180,7 @@ export default class Localized extends Component {
 
 Localized.contextTypes = {
   l10n: isReactLocalization,
-  parseMarkup: PropTypes.func,
+  parseMarkup: PropTypes.func
 };
 
 Localized.propTypes = {
